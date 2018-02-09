@@ -1,0 +1,58 @@
+this.JSONScreens = {
+  mainScreenJSON: {
+    id: 'mainScreen',
+    component: 'Window',
+    padding: 4,
+    position: {x: 0, y: 0},
+    width: this.options.gameWidth,
+    height: this.options.gameHeight,
+    layout: [1, 4],
+    children: [
+      {
+        id: 'label1',
+        text: 'Alien Armada',
+        font: {
+          size: '50px',
+          family: 'Skranji',
+          color: '#8f8'
+        },
+        component: 'Label',
+        position: 'center',
+        width: this.options.gameWidth,
+        height: 80
+      },
+      {
+        id: 'playBtn',
+        text: 'Play',
+        component: 'Button',
+        position: 'center',
+        width: 190,
+        height: 80,
+        font: {
+          color: this.options.GUIBtnColor
+        }
+      },
+      {
+        id: 'optionBtn',
+        text: 'Option',
+        component: 'Button',
+        position: 'center',
+        width: 190,
+        height: 80,
+        font: {
+          color: this.options.GUIBtnColor
+        }
+      },
+      {
+        id: 'customBtn',
+        text: 'Customize',
+        component: 'Button',
+        position: 'center',
+        width: 190,
+        height: 80,
+        font: {
+          color: this.options.GUIBtnColor
+        }
+      }
+    ]
+  },
