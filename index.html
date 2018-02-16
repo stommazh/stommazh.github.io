@@ -3,15 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Video chat</title>
+	<link rel="stylesheet" href="css/color-sampler.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h3 id="my_peer"></h3>
-<video id="localStream" width="300" controls autoplay></video>
-<br/>
-<video id="partnerStream" width="300" controls autoplay></video>
-<input type="text" placeholder="Partner id" id="txtPartnerSignal">
-<button id=btnConnect>Call</button>
-<script src="bundle.js">
-</script>
+<div id="chroma_keying_div">
+	<button id="startBtn">Start</button>
+	<button id="stopBtn">Stop</button>
+	<button id="resetBtn">Clear color</button>
+    <div id="chroma_overlay"></div>
+    <div id="chroma_video_wrapper">
+        <video id="chroma_video"></video>
+        <div id="chroma_background"></div>
+        <canvas id="chroma_canvas"></canvas>
+        <div id="chroma_preview"></div>
+	    <div id="color_preview"></div>
+        <ul id="color_list">
+
+        </ul>
+    </div>
+    <label for="filter">Filter: </label>
+    <select id="filter">
+        <option value="none">None</option>
+        <option value="blur">Blur</option>
+        <option value="grayscale">Grayscale</option>
+        <option value="invert">Invert</option>
+        <option value="sepia">Sepia</option>
+    </select>
+	<div class="background_wrapper">
+		<button id="bg_none">No background</button>
+		<div class=" bg bg-1" id="bg_1"></div>
+		<div class=" bg bg-2" id="bg_2"></div>
+		<div class=" bg bg-3" id="bg_3"></div>
+	</div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/color-sampler.js"></script>
+<script src="bundle.js"></script>
 </body>
 </html>

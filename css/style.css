@@ -1,0 +1,114 @@
+#chroma_keying_div{
+    position: fixed;
+    z-index:999999999;
+    width:200%;
+    height:200%;
+    top:0;
+    left:0;
+}
+#chroma_overlay{
+    width:100%;
+    height:100%;
+    background-color:#fff;
+}
+#chroma_background {
+    width: 640px;
+    height: 480px;
+    display: block;
+}
+.background_wrapper {
+    position: fixed;
+    top: 100px;
+    display: block;
+    width: 200px;
+    height: 500px;
+}
+.bg {
+    width: 50px;
+    height: 50px;
+    display: block;
+    background-size: cover;
+    margin: 20px;
+}
+#chroma_video_wrapper{
+    width:640px;
+    height:480px;
+    top: calc(50% - 320px);
+    left: calc(50% - 320px);
+    position:fixed;
+}
+#chroma_video{
+    display:none;
+}
+#chroma_video,#chroma_canvas{
+    width:640px;
+    height: 480px;
+    position:absolute;
+    top:0;
+    left:0;
+}
+#color_preview {
+    position:fixed;
+    width:50px;
+    height:50px;
+    border: 1px solid black;
+    top: 150px;
+    right: 100px;
+}
+#color_list{
+    position:fixed;
+    top: 250px;
+    right: 100px;
+    list-style: none;
+    overflow-y: auto;
+    max-height: 300px;
+}
+#color_list > li {
+    width:50px;
+    height:50px;
+    border: 1px solid black;
+}
+#filter{
+    position: fixed;
+    bottom: 50px;
+    width: 150px;
+    left:calc(50% - 100px);
+}
+.bg-1 {
+    background: url('../images/bg-1.jpg') no-repeat center center;
+}
+.bg-2 {
+    background: url('../images/bg-2.jpg') no-repeat center center;
+}
+.bg-3 {
+    background: url('../images/bg-3.jpg') no-repeat center center;
+}
+#close{
+    position:fixed;
+    top:100px;
+    right:100px;
+}
+.none {
+    -webkit-filter: none;
+    filter: none;
+}
+.blur {
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
+}
+.grayscale {
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+}
+.invert {
+    -webkit-filter: invert(1);
+    filter: invert(1);
+}
+.sepia {
+    -webkit-filter: sepia(1);
+    filter: sepia(1);
+}
+
+li {
+    margin: 10px 0;
+}
