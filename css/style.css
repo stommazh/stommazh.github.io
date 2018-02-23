@@ -112,3 +112,8 @@
 li {
     margin: 10px 0;
 }
+#chart {
+    z-index: 999;
+    bottom: 200px;
+    position: fixed;
+}
