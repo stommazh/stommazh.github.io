@@ -101,7 +101,6 @@
         function updateChart(){
             if(isPlaying) {
                 console.log("chart started");
-                currentFrame = 80 + Math.round(20 * Math.random());
                 if(maxFPS < currentFrame) {
                     maxFPS = currentFrame;
                     options.max = maxFPS;
