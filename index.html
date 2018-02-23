@@ -5,38 +5,43 @@
     <title>Video chat</title>
 	<link rel="stylesheet" href="css/color-sampler.css">
 	<link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <div id="chroma_keying_div">
-	<button id="startBtn">Start</button>
-	<button id="stopBtn">Stop</button>
-	<button id="resetBtn">Clear color</button>
+    <div class="btn-wrapper">
+        <button id="startBtn">Start</button>
+        <button id="stopBtn">Stop</button>
+        <button id="resetBtn">Clear color</button>
+        <label for="filter">Filter: </label>
+        <select id="filter">
+            <option value="none">None</option>
+            <option value="blur">Blur</option>
+            <option value="grayscale">Grayscale</option>
+            <option value="invert">Invert</option>
+            <option value="sepia">Sepia</option>
+        </select>
+    </div>
     <div id="chroma_overlay"></div>
     <div id="chroma_video_wrapper">
         <video id="chroma_video"></video>
         <div id="chroma_background"></div>
         <canvas id="chroma_canvas"></canvas>
         <div id="chroma_preview"></div>
-	    <div id="color_preview"></div>
-        <ul id="color_list">
-
-        </ul>
     </div>
-    <label for="filter">Filter: </label>
-    <select id="filter">
-        <option value="none">None</option>
-        <option value="blur">Blur</option>
-        <option value="grayscale">Grayscale</option>
-        <option value="invert">Invert</option>
-        <option value="sepia">Sepia</option>
-    </select>
+    <div class="color">
+        <div id="color_preview"></div>
+        <ul id="color_list"></ul>
+    </div>
 	<div class="background_wrapper">
-		<button id="bg_none">No background</button>
+		<button id="bg_none">Clear BG</button>
 		<div class=" bg bg-1" id="bg_1"></div>
 		<div class=" bg bg-2" id="bg_2"></div>
 		<div class=" bg bg-3" id="bg_3"></div>
 	</div>
+    <div id="chart"></div>
 </div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/color-sampler.js"></script>
 <script src="bundle.js"></script>
