@@ -171,7 +171,7 @@
             });
 
             function addColor(color, delta) {
-                color = color.split("(")[1].split(")")[0];
+                color = color.split("(")[1].split(")")[0]; //x,y,z
                 color = color.split(",");
                 const red = parseInt(color[0]);
                 const green = parseInt(color[1]);
