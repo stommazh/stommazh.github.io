@@ -172,8 +172,8 @@
             navigator.getUserMedia(
                 {
                     video: {
-                        width: { ideal: 1280 },
-                        height: { ideal: 720 }
+                        width: { ideal: window.innerWidth },
+                        height: { ideal: window.innerHeight }
                     }}, handleVideo, videoError);
         }
         isPlaying = true;
@@ -186,8 +186,7 @@
                 videoheight = this.videoHeight;
                 video.style.width = ""+this.videoWidth;
                 video.style.height = ""+this.videoHeight;
-                chroma_background.style.width = ""+this.videoWidth;
-                chroma_background.style.height = ""+this.videoHeight;
+                chroma_background.setAttribute("style","width:"+this.videoWidth+"px; height:"+this.videoHeight+"px");
                 videoWrapper.style.left = "calc(50% - "+this.videoWidth/2+"px)";
                 video.play();
             };

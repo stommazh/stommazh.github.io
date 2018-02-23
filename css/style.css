@@ -19,6 +19,7 @@
 }
 #chroma_background {
     display: block;
+    background-size: 100%;
 }
 .background_wrapper {
     position: fixed;
