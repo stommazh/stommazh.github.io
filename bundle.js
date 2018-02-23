@@ -76,6 +76,7 @@
     let chroma_canvas = document.getElementById("chroma_canvas");
     let chroma_background = document.getElementById("chroma_background");
     let color_list = document.getElementById("color_list");
+    let videoWrapper = document.getElementById("chroma_video_wrapper");
     let colors = [];
     let delta = 20;//chroma-keying range threshold
     let videowidth, videoheight;
@@ -168,7 +169,12 @@
     startBtn.onclick = function () {
         if (navigator.getUserMedia) {
             // get webcam feed if available
-            navigator.getUserMedia({video: true}, handleVideo, videoError);
+            navigator.getUserMedia(
+                {
+                    video: {
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    }}, handleVideo, videoError);
         }
         isPlaying = true;
 
@@ -178,6 +184,11 @@
             video.onloadedmetadata = function () {
                 videowidth = this.videoWidth;
                 videoheight = this.videoHeight;
+                video.style.width = ""+this.videoWidth;
+                video.style.height = ""+this.videoHeight;
+                chroma_background.style.width = ""+this.videoWidth;
+                chroma_background.style.height = ""+this.videoHeight;
+                videoWrapper.style.left = "calc(50% - "+this.videoWidth/2+"px)";
                 video.play();
             };
 
