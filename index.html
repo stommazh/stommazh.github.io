@@ -9,28 +9,30 @@
 </head>
 <body>
 <div id="chroma_keying_div">
-	<button id="startBtn">Start</button>
-	<button id="stopBtn">Stop</button>
-	<button id="resetBtn">Clear color</button>
+    <div class="btn-wrapper">
+        <button id="startBtn">Start</button>
+        <button id="stopBtn">Stop</button>
+        <button id="resetBtn">Clear color</button>
+        <label for="filter">Filter: </label>
+        <select id="filter">
+            <option value="none">None</option>
+            <option value="blur">Blur</option>
+            <option value="grayscale">Grayscale</option>
+            <option value="invert">Invert</option>
+            <option value="sepia">Sepia</option>
+        </select>
+    </div>
     <div id="chroma_overlay"></div>
     <div id="chroma_video_wrapper">
         <video id="chroma_video"></video>
         <div id="chroma_background"></div>
         <canvas id="chroma_canvas"></canvas>
         <div id="chroma_preview"></div>
-	    <div id="color_preview"></div>
-        <ul id="color_list">
-
-        </ul>
+        <div class="color">
+            <div id="color_preview"></div>
+            <ul id="color_list"></ul>
+        </div>
     </div>
-    <label for="filter">Filter: </label>
-    <select id="filter">
-        <option value="none">None</option>
-        <option value="blur">Blur</option>
-        <option value="grayscale">Grayscale</option>
-        <option value="invert">Invert</option>
-        <option value="sepia">Sepia</option>
-    </select>
 	<div class="background_wrapper">
 		<button id="bg_none">No background</button>
 		<div class=" bg bg-1" id="bg_1"></div>
