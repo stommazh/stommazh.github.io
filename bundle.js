@@ -71,7 +71,7 @@
     let resetBtn = document.getElementById("resetBtn");
     let startBtn = document.getElementById("startBtn");
     let stopBtn = document.getElementById("stopBtn");
-    let filterSelect = document.querySelector("select#filter");
+    let saveBtn = document.getElementById("saveBtn");
     let video = document.getElementById("chroma_video");
     let chroma_canvas = document.getElementById("chroma_canvas");
     let chroma_background = document.getElementById("chroma_background");
@@ -82,12 +82,49 @@
     let videowidth, videoheight;
     let bg_1 = document.getElementById("bg_1");
     let bg_2 = document.getElementById("bg_2");
-    let bg_none = document.getElementById("bg_none");
     let bg_3 = document.getElementById("bg_3");
     let color_preview = document.getElementById("color_preview");
     let currentFrame = 0;
     let maxFPS = 0;
     let isPlaying = false;
+    let isSave = 0;
+    // CSS filter variables
+    let defaultColor = [0, 100, 100, 100, 0 ,0 ,0, 0];
+    let [sepia, brightness, contrast, saturate, grayscale, invert, hue_rotate, blur] = defaultColor;
+    //Filter controller
+    let sepiaController = document.getElementById("sepiaController"),
+        brightnessController = document.getElementById("brightnessController"),
+        contrastController = document.getElementById("contrastController"),
+        saturateController =document.getElementById("saturateController"),
+        grayscaleController = document.getElementById("grayscaleController"),
+        invertController = document.getElementById("invertController"),
+        hue_rotateController = document.getElementById("hue_rotateController"),
+        blurController = document.getElementById("blurController");
+    let controllerArray = [sepiaController, brightnessController, contrastController, saturateController, grayscaleController, invertController, hue_rotateController, blurController];
+    //Set default value
+    sepiaController.value = sepia;
+    brightnessController.value = brightness;
+    contrastController.value = contrast;
+    saturateController.value = saturate;
+    grayscaleController.value = grayscale;
+    invertController.value = invert;
+    hue_rotateController.value = hue_rotate;
+    blurController.value = blur;
+    for(let i=0; i< controllerArray.length; i++) {
+        controllerArray[i].addEventListener("input", setFilter);
+    }
+    function saveAs(uri, filename) {
+        var link = document.createElement('a');
+        if (typeof link.download === 'string') {
+            document.body.appendChild(link); // Firefox requires the link to be in the body
+            link.download = filename;
+            link.href = uri;
+            link.click();
+            document.body.removeChild(link); // remove the link when done
+        } else {
+            location.replace(uri);
+        }
+    }
     google.charts.load('current', {'packages':['gauge']});
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
@@ -106,7 +143,6 @@
                     maxFPS = currentFrame;
                     options.max = maxFPS;
                 }
-                //addRow([currentSecond,currentFrame]);
                 data.setValue(0, 1, currentFrame);
                 chart.draw(data, options);
             }
@@ -153,17 +189,56 @@
                 let subPixelGreen = frame.data[i * 4 + 1];
                 let subPixelBlue = frame.data[i * 4 + 2];
                 for (const color of colors) {
-                    if ((color.green.lower <= subPixelGreen) && (subPixelGreen <= color.green.upper) && (color.red.lower <= subPixelRed) && (subPixelRed <= color.red.upper) && (color.blue.lower <= subPixelBlue) && (subPixelBlue <= color.blue.upper)) {
+                    if ((color.green.lower <= subPixelGreen)
+                        && (subPixelGreen <= color.green.upper)
+                        && (color.red.lower <= subPixelRed)
+                        && (subPixelRed <= color.red.upper)
+                        && (color.blue.lower <= subPixelBlue)
+                        && (subPixelBlue <= color.blue.upper))
+                    {
                         frame.data[i * 4 + 3] = 0;
                         break;
                     }
                 }
             }
         chroma_canvas.getContext('2d').putImageData(frame, 0, 0);
+        if (isSave) {
+            console.log("save image");
+            //Apply filter
+            let ctx = chroma_canvas.getContext('2d');
+            ctx.filter = "sepia("+sepia+"%) brightness("+brightness+"%) contrast("+contrast+"%) saturate("+saturate+"%) grayscale("+grayscale+"%) invert("+invert+"%) hue-rotate("+hue_rotate+"deg) blur("+blur+"px)";
+            ctx.drawImage(chroma_canvas,0,0,chroma_canvas.width, chroma_canvas.height);
+            let background = document.getElementById('chroma_background'),
+                style = background.currentStyle || window.getComputedStyle(background, false),
+                bi = style.backgroundImage.slice(4, -1).replace(/"/g, "");
+            let img = new Image();
+            img.onload = function() {
+                let bgctx = chroma_canvas.getContext('2d');
+                bgctx.globalCompositeOperation = 'destination-over';
+                bgctx.drawImage(img, 0, 0, chroma_canvas.width, chroma_canvas.height);
+                let saveImage = chroma_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+                saveAs(saveImage,"photo.png");
+                isSave = 0;
+            };
+            img.src = bi;
+        }
         currentFrame++;
         setTimeout(
             callback
             , 0);
+    }
+
+    function setFilter() {
+        console.log("trigger");
+        sepia = sepiaController.value;
+        brightness = brightnessController.value;
+        contrast = contrastController.value;
+        saturate = saturateController.value;
+        grayscale = grayscaleController.value;
+        invert = invertController.value;
+        hue_rotate = hue_rotateController.value;
+        blur = blurController.value;
+        chroma_canvas.setAttribute("style","filter: sepia("+sepia+"%) brightness("+brightness+"%) contrast("+contrast+"%) saturate("+saturate+"%) grayscale("+grayscale+"%) invert("+invert+"%) hue-rotate("+hue_rotate+"deg) blur("+blur+"px);");
     }
 
     startBtn.onclick = function () {
@@ -172,8 +247,10 @@
             navigator.getUserMedia(
                 {
                     video: {
-                        width: { ideal: window.innerWidth },
-                        height: { ideal: window.innerHeight }
+                        // width: { ideal: window.innerWidth },
+                        // height: { ideal: window.innerHeight }
+                        width: 640,
+                        height: 480
                     }}, handleVideo, videoError);
         }
         isPlaying = true;
@@ -184,9 +261,11 @@
             video.onloadedmetadata = function () {
                 videowidth = this.videoWidth;
                 videoheight = this.videoHeight;
-                video.style.width = ""+this.videoWidth;
-                video.style.height = ""+this.videoHeight;
-                chroma_background.setAttribute("style","width:"+this.videoWidth+"px; height:"+this.videoHeight+"px");
+                // video.style.width = ""+this.videoWidth;
+                // video.style.height = ""+this.videoHeight;
+                video.style.width = "640px";
+                video.style.height = "480px";
+                chroma_background.setAttribute("style","width:640px; height:480px");
                 videoWrapper.style.left = "calc(50% - "+this.videoWidth/2+"px)";
                 video.play();
             };
@@ -203,13 +282,26 @@
             alert("No camera found");
         }
     };
-    filterSelect.addEventListener('change', function () {
-        chroma_canvas.className = filterSelect.value;
-    });
     resetBtn.addEventListener('click', function () {
         colors = [];
         color_list.innerHTML = '';
+        [sepia, brightness, contrast, saturate, grayscale, invert, hue_rotate, blur] = defaultColor;
+        sepiaController.value = sepia;
+        brightnessController.value = brightness;
+        contrastController.value = contrast;
+        saturateController.value = saturate;
+        grayscaleController.value = grayscale;
+        invertController.value = invert;
+        hue_rotateController.value = hue_rotate;
+        blurController.value = blur;
+        setFilter();
+        chroma_background.className = '';
+        chroma_background.classList.add("bg-3");
     });
+    saveBtn.addEventListener('click',function (){
+        isSave = 1;
+        console.log("set is save to " + isSave);
+    })
     bg_1.addEventListener('click', function () {
         chroma_background.className = '';
         chroma_background.classList.add("bg-1");
@@ -221,9 +313,6 @@
     bg_3.addEventListener('click', function () {
         chroma_background.className = '';
         chroma_background.classList.add("bg-3");
-    });
-    bg_none.addEventListener('click', function () {
-        chroma_background.className = '';
     });
 
     function addColor(color, delta) {
