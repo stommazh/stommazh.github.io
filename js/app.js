@@ -47,11 +47,11 @@
     function saveAs(uri, filename) {
         var link = document.createElement('a');
         if (typeof link.download === 'string') {
-            document.body.appendChild(link); // Firefox requires the link to be in the body
+            document.body.appendChild(link);
             link.download = filename;
             link.href = uri;
             link.click();
-            document.body.removeChild(link); // remove the link when done
+            document.body.removeChild(link);
         } else {
             location.replace(uri);
         }
@@ -145,6 +145,7 @@
             let img = new Image();
             img.onload = function() {
                 let bgctx = chroma_canvas.getContext('2d');
+                bgctx.filter = "none";
                 bgctx.globalCompositeOperation = 'destination-over';
                 bgctx.drawImage(img, 0, 0, chroma_canvas.width, chroma_canvas.height);
                 let saveImage = chroma_canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
