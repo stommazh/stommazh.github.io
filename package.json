@@ -1,0 +1,19 @@
+{
+  "name": "insurance",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently --names \"SASS,CLIENT\" -c \"bgBlue.bold,bgMagenta.bold\" --kill-others \"sass --watch src/sass:assets/css\" \"http-server ./ -c 10\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sass": "^1.62.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.1.0",
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  }
+}
