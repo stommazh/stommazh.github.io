@@ -100,6 +100,29 @@ img.logo {
   width: 311px;
 }
 
+#sub-menu-mobile-checkbox:checked ~ .sub-menu-mobile {
+  display: block;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 30px;
+}
+
+.sub-menu-mobile-checkbox {
+  cursor: pointer;
+}
+
+.sub-menu-mobile {
+  display: none;
+  cursor: pointer;
+}
+.sub-menu-mobile > a {
+  cursor: pointer;
+  font-weight: 500;
+  padding: 10px 0;
+}
+.sub-menu-mobile > a:hover, .sub-menu-mobile > a:focus {
+  text-decoration: underline;
+}
+
 header ul {
   list-style-type: none;
   margin: 0 auto;
@@ -107,43 +130,35 @@ header ul {
   text-align: center;
   width: 100%;
   position: absolute;
-  background: #8aa8bd;
+  background: rgba(33, 94, 233, 0.71);
+  backdrop-filter: blur(3px);
 }
 header li {
   display: inline-block;
 }
-header li a {
+header li a, header li label {
   display: block;
   min-width: 140px;
+  cursor: pointer;
   text-align: center;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #fff;
   text-transform: uppercase;
-  background: #8aa8bd;
+  font-weight: bold;
   text-decoration: none;
   margin-left: -5px;
-  padding: 10px 0;
+  padding: 15px 0;
   -webkit-transition: all 0.4s ease 0s;
   -moz-transition: all 0.4s ease 0s;
   -ms-transition: all 0.4s ease 0s;
   -o-transition: all 0.4s ease 0s;
   transition: all 0.4s ease 0s;
 }
-header li:hover a {
-  color: #4db3ff;
-  background-color: #ccddee;
-}
-header li:hover ul a {
-  background: #f3f3f3;
-  color: #2f3036;
-  height: 40px;
-  line-height: 40px;
-}
-header li:hover .mobile-menu ul a:hover {
-  color: #4db3ff;
+header li:hover > a {
+  text-decoration: underline;
 }
 header li ul {
   display: none;
+  border-radius: 12px;
 }
 header li ul li {
   display: block;
@@ -157,8 +172,7 @@ header li ul li a {
 header .show-menu {
   text-decoration: none;
   color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--color-blue);
   border-radius: 5px;
   text-align: center;
   padding: 10px 15px;
@@ -174,6 +188,10 @@ header input[type=checkbox] {
 }
 header input[type=checkbox]:checked ~ #menu {
   display: block;
+  position: absolute;
+  left: 0;
+  top: 90px;
+  border-radius: 10px;
 }
 
 @media screen and (max-width: 779px) {
@@ -210,6 +228,11 @@ header {
   left: 0;
   padding: 0 var(--page-padding-x);
 }
+@media all and (min-width: 780px) {
+  header ul {
+    display: none !important;
+  }
+}
 header .header__wrapper {
   display: flex;
   justify-content: space-between;
@@ -228,26 +251,74 @@ header a.button {
   padding: 9px 27px;
   color: #fff;
   text-decoration: none;
-  display: flex;
+  display: none;
+}
+@media all and (min-width: 780px) {
+  header a.button {
+    display: flex;
+  }
 }
 header nav {
   font-size: 16px;
   font-weight: 500;
   line-height: 20px;
   color: #7D8790;
-  display: flex;
+  display: none;
 }
-header nav a, header nav div {
+header nav .sub-item {
+  display: none;
+  position: absolute;
+  background-color: rgba(252, 252, 252, 0.6);
+  backdrop-filter: blur(3px);
+  border-radius: 4px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.18);
+  margin: 0;
+  width: 200px;
+  left: -100%;
+  top: 50px;
+  color: #7D8790;
+}
+header nav .sub-item a {
+  display: block;
+  padding: 15px 4px;
+  text-align: center;
+  font-weight: 500;
+}
+header nav .sub-item a:hover, header nav .sub-item a:focus, header nav .sub-item a:active {
+  background-color: rgba(0, 0, 0, 0.03);
+  color: var(--color-blue);
+}
+header nav .group-item {
+  position: relative;
+}
+header nav .group-item:hover:after, header nav .group-item:focus:after {
+  content: "";
+  background-color: transparent;
+  width: 200px;
+  height: 25px;
+  position: absolute;
+  left: -100%;
+  bottom: -8px;
+}
+header nav .group-item:hover .sub-item, header nav .group-item:focus .sub-item {
+  display: block;
+}
+@media all and (min-width: 780px) {
+  header nav {
+    display: flex;
+  }
+}
+header nav > a, header nav > div {
   text-decoration: none;
   padding: 10px 0;
   position: relative;
   margin: 0 20px;
   cursor: pointer;
 }
-header nav a:hover, header nav div:hover {
+header nav > a:hover, header nav > div:hover {
   color: var(--color-blue);
 }
-header nav a.active, header nav div.active {
+header nav > a.active, header nav > div.active {
   color: var(--color-blue);
   border-bottom: 2px solid var(--color-blue);
 }
@@ -675,6 +746,7 @@ footer .copy-right {
   position: relative;
   margin-top: -80px;
   margin-bottom: 20px;
+  display: flex;
 }
 .testimonial__sliders .slider-wrapper .slider-item .bio img {
   border-radius: 50%;
@@ -700,6 +772,7 @@ footer .copy-right {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   vertical-align: top;
   top: 20px;
+  align-self: baseline;
 }
 .testimonial__sliders .slider-wrapper .slider-item .bio__info .name {
   text-transform: uppercase;
