@@ -48,7 +48,7 @@ img {
 #sub-menu-mobile-checkbox:checked ~ .sub-menu-mobile {
   display: block;
   background: rgba(0,0,0,0.05);
-  border-radius: 30px;
+  border-radius: 20px;
 }
 .sub-menu-mobile-checkbox {
   cursor: pointer;
@@ -139,7 +139,9 @@ header {
           position: absolute;
           left: 0;
           top: 90px;
-          border-radius: 10px;
+          border-radius: 20px;
+          margin: 0 20px;
+          width: calc(100% - 40px);
         }
       }
     }
