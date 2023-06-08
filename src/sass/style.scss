@@ -176,6 +176,52 @@ header {
     }
   }
 }
+
+
+.sub-item {
+  display: none;
+  position: absolute!important;
+  background-color: rgb(252 252 252 / 60%);
+  backdrop-filter: blur(3px);
+  border-radius: 4px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.18);
+  margin: 0;
+  width: 200px;
+  left: -100%;
+  top: 50px;
+  color: #7D8790;
+
+  a {
+    display: block;
+    padding: 15px 4px;
+    text-align: center;
+    font-weight: 500;
+
+    &:hover, &:focus, &:active {
+      background-color: rgba(0,0,0,0.03);
+      color: var(--color-blue);
+    }
+  }
+}
+
+.group-item {
+  position: relative;
+  &:hover, &:focus {
+    &:after {
+      content: "";
+      background-color: transparent;
+      width: 200px;
+      height: 25px;
+      position: absolute;
+      left: -100%;
+      bottom: -8px;
+    }
+    .sub-item {
+      display: block;
+    }
+  }
+}
+
 header {
   width: 100%;
   position: absolute;
@@ -220,50 +266,6 @@ header {
     line-height: 20px;
     color: #7D8790;
     display: none;
-
-    .sub-item {
-      display: none;
-      position: absolute;
-      background-color: rgb(252 252 252 / 60%);
-      backdrop-filter: blur(3px);
-      border-radius: 4px;
-      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.18);
-      margin: 0;
-      width: 200px;
-      left: -100%;
-      top: 50px;
-      color: #7D8790;
-
-      a {
-        display: block;
-        padding: 15px 4px;
-        text-align: center;
-        font-weight: 500;
-
-        &:hover, &:focus, &:active {
-          background-color: rgba(0,0,0,0.03);
-          color: var(--color-blue);
-        }
-      }
-    }
-
-    .group-item {
-      position: relative;
-      &:hover, &:focus {
-        &:after {
-          content: "";
-          background-color: transparent;
-          width: 200px;
-          height: 25px;
-          position: absolute;
-          left: -100%;
-          bottom: -8px;
-        }
-        .sub-item {
-          display: block;
-        }
-      }
-    }
 
     @media all and (min-width: 780px) {
       display: flex;
@@ -629,6 +631,14 @@ header {
 footer {
   background-color: var(--color-blue);
   padding: 100px 100px 40px;
+  .sub-item {
+    top: unset;
+    bottom: 100%;
+  }
+  .group-item:after {
+    left: -72%;
+    bottom: 20px;
+  }
 
   .footer-nav {
     display: flex;
