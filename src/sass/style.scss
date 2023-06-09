@@ -682,11 +682,29 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: #fff;
     flex-flow: column;
     width: 100%;
     position: relative;
     max-width: var(--page-inner-width);
     margin: 0 auto;
+    &__logos {
+      display: flex;
+      align-items: center;
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
+      .power-by {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        img {
+          margin-left: 10px;
+          width: 100px;
+        }
+      }
+    }
 
     @media all and (min-width: 780px) {
       flex-flow: row;

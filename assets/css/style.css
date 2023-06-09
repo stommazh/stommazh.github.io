@@ -665,11 +665,29 @@ footer .footer-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #fff;
   flex-flow: column;
   width: 100%;
   position: relative;
   max-width: var(--page-inner-width);
   margin: 0 auto;
+}
+footer .footer-nav__logos {
+  display: flex;
+  align-items: center;
+}
+footer .footer-nav__logos a {
+  color: #fff;
+  text-decoration: none;
+}
+footer .footer-nav__logos .power-by {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+footer .footer-nav__logos .power-by img {
+  margin-left: 10px;
+  width: 100px;
 }
 @media all and (min-width: 780px) {
   footer .footer-nav {
