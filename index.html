@@ -443,6 +443,9 @@
 <script>
   // Slider
   (() => {
+    if (!document.querySelector('.testimonial__sliders .slider-nav button')) {
+      return;
+    }
     const [prevBtn, nextBtn] = document.querySelectorAll('.testimonial__sliders .slider-nav button');
     const slides = Array.from(document.querySelectorAll('.testimonial__sliders .slider-item'));
     if (slides.length <= 1) {

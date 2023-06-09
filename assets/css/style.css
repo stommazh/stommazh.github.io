@@ -330,14 +330,29 @@ header nav > a.active, header nav > div.active {
 .hero-banner {
   width: 100%;
   min-height: 100vh;
-  background: #fff url("/assets/images/hero-bg.png") no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  background: #fff url("/assets/images/hero-bg.jpg") no-repeat center center;
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
+  background-size: cover !important;
   display: flex;
   padding: 330px var(--page-padding-x) 150px;
   align-items: center;
+}
+.hero-banner.nam-vien {
+  background: #fff url("/assets/images/bao-hiem-nam-vien-hero-bg.jpg") no-repeat center center;
+}
+.hero-banner.xe-may {
+  background: #fff url("/assets/images/bao-hiem-xe-may-hero-bg.jpg") no-repeat center center;
+}
+.hero-banner.xe-may .hero-banner__text--heading {
+  color: #FFB800;
+}
+.hero-banner.oto {
+  background: #fff url("/assets/images/bao-hiem-oto-hero-bg.jpg") no-repeat center center;
+}
+.hero-banner.oto .hero-banner__text--heading {
+  color: #EF4358;
 }
 .hero-banner__text {
   margin: 0 auto;
@@ -485,6 +500,24 @@ header nav > a.active, header nav > div.active {
 }
 .benefit__title span {
   color: var(--color-blue);
+}
+.benefit__wrapper {
+  padding: 70px 20px;
+  min-height: 500px;
+  background: url("/assets/images/bg-dot-top.png") calc(50% + 530px) 71px/200px no-repeat, url("/assets/images/bg-dot-bottom.png") calc(50% - 475px) calc(100% - 18px)/200px no-repeat, linear-gradient(180deg, rgba(236, 240, 253, 0) 0%, rgba(236, 240, 253, 0.53) 14.32%, #ECF0FD 45.83%, rgba(236, 240, 253, 0.43) 84.33%, rgba(236, 240, 253, 0) 100%);
+  position: relative;
+  width: 100%;
+}
+.benefit__content {
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 55px 40px;
+  border-radius: 10px;
+}
+.benefit__content p, .benefit__content ul {
+  margin-bottom: 20px;
 }
 .benefit__tables {
   padding: 70px 20px;
