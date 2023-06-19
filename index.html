@@ -38,15 +38,21 @@
         <a href="#dang-ky" class="button">
             Đăng ký
         </a>
+        <input type="checkbox" id="show-menu">
         <label for="show-menu" class="show-menu">
             <div class="lines"></div>
         </label>
-        <input type="checkbox" id="show-menu">
-        <ul id="menu">
-            <li><a href="#">Trang chủ</a></li>
-            <li>
-                <label for="sub-menu-mobile-checkbox">Sản phẩm</label>
+        <label class="mobile-menu-overlay" for="show-menu">
+
+        </label>
+        <div id="mobile-menu">
+            <a href="#" class="active">Trang chủ</a>
+            <div>
                 <input id="sub-menu-mobile-checkbox" type="checkbox" hidden/>
+                <label for="sub-menu-mobile-checkbox" class="product-label">
+                    <span>Sản phẩm</span>
+                    <img src="assets/images/chevron-right.svg"/>
+                </label>
                 <div class="sub-menu-mobile">
                     <a>
                         Bảo hiểm trợ cấp nằm viện
@@ -58,10 +64,9 @@
                         Bảo hiểm dân sự xe oto
                     </a>
                 </div>
-            </li>
-            <li><a href="#">Liên hệ</a></li>
-            <li><a href="#dang-ky">Đăng ký</a></li>
-        </ul>
+            </div>
+            <a href="#">Liên hệ</a>
+        </div>
     </div>
 </header>
 
@@ -179,8 +184,11 @@
     <div class="benefit__tables">
         <div class="benefit__tables--wrapper">
             <img src="assets/images/decor.png" class="bg-decor"/>
-            <img src="assets/images/table-1.png"/>
-            <img src="assets/images/table-2.png"/>
+            <img class="desktop" src="assets/images/table-1.png"/>
+            <img class="desktop" src="assets/images/table-2.png"/>
+            <img class="mobile" src="assets/images/table-mobile-1.png"/>
+            <img class="mobile" src="assets/images/table-mobile-2.png"/>
+            <img class="mobile" src="assets/images/table-mobile-3.png"/>
         </div>
     </div>
 </section>
@@ -341,6 +349,9 @@
                 </div>
             </div>
         </div>
+        <div class="mobile-benefit-note">
+            *Lưu ý: Các trường hợp trên là minh họa và không nên được coi là sự tư vấn chính thức
+        </div>
         <div class="slider-nav">
             <button>←</button>
             <button>→</button>
@@ -441,7 +452,7 @@
             <img src="assets/images/arrow-top.svg"/>
         </div>
     </div>
-    <div class="divider"></div>
+    <!--    <div class="divider"></div>-->
     <div class="copy-right">
         <p>Copyright @ Công Ty Cổ Phần Navigos Group Việt Nam</p>
         <p>Tầng 20, tòa nhà E.Town Central, 11 Đoàn Văn Bơ, Phường 12, Quận 4, TP.HCM, Việt Nam</p>
